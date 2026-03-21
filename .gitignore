@@ -1,0 +1,23 @@
+# Documentos de Planificación (Ignorados por petición)
+1.apparquitecture.md
+2.stepByStepDevelopment.md
+contexto.md
+PlanDeArquitecturaYDespliegue.md
+
+# Java / Maven (en customers-api)
+customers-api/target/
+customers-api/.mvn/wrapper/maven-wrapper.jar
+customers-api/mvnw.cmd
+.DS_Store
+
+# Terraform
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.backup
+**/*.hcl
+**/.terraform.lock.hcl
+
+# Environment & Secrets
+**/.env
+**/*.env
+**/credentials.json
