@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: customers-dev
+app:
+  startup:
+    message: "Ejecutando en DEV"
+logging:
+  level:
+    root: INFO
+    com.bank.customers: DEBUG

@@ -1,0 +1,12 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: customers-prod
+app:
+  startup:
+    message: "Ejecutando en PROD"
+logging:
+  level:
+    root: INFO
+    com.bank.customers: INFO
