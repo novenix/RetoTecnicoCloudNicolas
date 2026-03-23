@@ -11,7 +11,7 @@ resource "google_cloud_run_v2_service" "customers_service" {
 
     containers {
       image = var.container_image
-      
+
       ports {
         container_port = var.application_port
       }
@@ -20,7 +20,7 @@ resource "google_cloud_run_v2_service" "customers_service" {
         name  = "SPRING_PROFILES_ACTIVE"
         value = var.spring_profile
       }
-      
+
       # For Cloud Run, PORT env var is also expected by Spring Boot
       env {
         name  = "PORT"

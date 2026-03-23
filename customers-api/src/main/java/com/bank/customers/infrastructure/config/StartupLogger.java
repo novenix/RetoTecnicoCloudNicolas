@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class StartupLogger {
 
-    @Value("${app.startup.message}")
-    private String startupMessage;
+  @Value("${app.startup.message}")
+  private String startupMessage;
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void logStartupMessage() {
-        log.info("***************************************************");
-        log.info(">>>>> STATUS: " + startupMessage);
-        log.info("***************************************************");
-    }
+  @EventListener(ApplicationReadyEvent.class)
+  public void logStartupMessage() {
+    log.info("***************************************************");
+    log.info(">>>>> STATUS: " + startupMessage);
+    log.info("***************************************************");
+  }
 }

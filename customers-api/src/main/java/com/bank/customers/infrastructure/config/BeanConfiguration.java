@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanConfiguration {
 
-    @Bean
-    public CustomerService customerService(CustomerRepositoryPort customerRepositoryPort) {
-        return new CustomerService(customerRepositoryPort);
-    }
+  @Bean
+  public CustomerService customerService(CustomerRepositoryPort customerRepositoryPort) {
+    return new CustomerService(customerRepositoryPort);
+  }
 }
