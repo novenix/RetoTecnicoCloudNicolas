@@ -14,7 +14,9 @@ public class CustomerService implements CreateCustomerUseCase, GetCustomersQuery
 
   @Override
   public Customer createCustomer(Customer customer) {
-    // logica
+    if (customerRepositoryPort.existsByEmail(customer.getEmail())) {
+      throw new RuntimeException("El email '" + customer.getEmail() + "' ya está registrado");
+    }
     return customerRepositoryPort.save(customer);
   }
 
