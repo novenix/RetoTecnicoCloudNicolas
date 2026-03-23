@@ -7,4 +7,6 @@ public interface CustomerRepositoryPort {
   Customer save(Customer customer);
 
   List<Customer> findAll();
+
+  boolean existsByEmail(String email);
 }

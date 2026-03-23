@@ -27,6 +27,11 @@ public class CustomerJpaAdapter implements CustomerRepositoryPort {
         .collect(Collectors.toList());
   }
 
+  @Override
+  public boolean existsByEmail(String email) {
+    return customerJpaRepository.existsByEmail(email);
+  }
+
   private CustomerEntity toEntity(Customer domain) {
     return CustomerEntity.builder()
         .id(domain.getId())
