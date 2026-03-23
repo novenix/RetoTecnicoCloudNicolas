@@ -41,8 +41,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(BusinessException.class)
   public ResponseEntity<ErrorResponse> handleBusinessExceptions(BusinessException ex) {
     ErrorResponse errorResponse =
-        new ErrorResponse(
-            ex.getMessage(), HttpStatus.CONFLICT.value(), LocalDateTime.now(), null);
+        new ErrorResponse(ex.getMessage(), HttpStatus.CONFLICT.value(), LocalDateTime.now(), null);
     return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
   }
 

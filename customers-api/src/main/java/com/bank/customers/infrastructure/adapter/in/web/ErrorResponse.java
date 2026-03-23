@@ -4,8 +4,4 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 public record ErrorResponse(
-    String message,
-    int status,
-    LocalDateTime timestamp,
-    Map<String, String> details
-) {}
+    String message, int status, LocalDateTime timestamp, Map<String, String> details) {}
