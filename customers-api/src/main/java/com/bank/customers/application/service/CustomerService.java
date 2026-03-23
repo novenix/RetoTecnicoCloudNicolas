@@ -1,7 +1,5 @@
 package com.bank.customers.application.service;
 
-import java.util.List;
-
 import com.bank.customers.application.port.in.CreateCustomerUseCase;
 import com.bank.customers.application.port.in.GetCustomersQuery;
 import com.bank.customers.application.port.out.CustomerRepositoryPort;
@@ -16,7 +14,7 @@ public class CustomerService implements CreateCustomerUseCase, GetCustomersQuery
 
   @Override
   public Customer createCustomer(Customer customer) {
-    // Aquí podríamos añadir lógica de negocio, por ejemplo validaciones adicionales
+    // logica
     return customerRepositoryPort.save(customer);
   }
 
