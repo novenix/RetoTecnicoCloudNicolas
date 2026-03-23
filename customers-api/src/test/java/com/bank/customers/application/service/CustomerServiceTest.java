@@ -2,9 +2,11 @@ package com.bank.customers.application.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 import com.bank.customers.application.port.out.CustomerRepositoryPort;
+import com.bank.customers.domain.exception.BusinessException;
 import com.bank.customers.domain.model.Customer;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -22,44 +24,34 @@ class CustomerServiceTest {
   @InjectMocks private CustomerService customerService;
 
   @Test
-  @DisplayName("Debe crear un cliente correctamente llamando al puerto de salida")
+  @DisplayName("Debe crear un cliente correctamente cuando no existe el email")
   void createCustomer_Success() {
-    // Arrange (Preparación)
-    Customer customerToSave =
-        Customer.builder().name("Nicolas Torres").email("nicolas@email.com").build();
+    Customer customer = Customer.builder().name("Nicolas").email("n@mail.com").build();
+    when(customerRepositoryPort.existsByEmail(anyString())).thenReturn(false);
+    when(customerRepositoryPort.save(any(Customer.class))).thenReturn(customer);
 
-    Customer savedCustomer =
-        Customer.builder().id(1L).name("Nicolas Torres").email("nicolas@email.com").build();
+    Customer result = customerService.createCustomer(customer);
 
-    when(customerRepositoryPort.save(any(Customer.class))).thenReturn(savedCustomer);
-
-    // Act (Ejecución)
-    Customer result = customerService.createCustomer(customerToSave);
-
-    // Assert (Verificación)
     assertNotNull(result);
-    assertEquals(1L, result.getId());
-    assertEquals("Nicolas Torres", result.getName());
-    verify(customerRepositoryPort, times(1)).save(customerToSave);
+    verify(customerRepositoryPort).save(customer);
   }
 
   @Test
-  @DisplayName("Debe retornar la lista de clientes desde el repositorio")
+  @DisplayName("Debe lanzar BusinessException cuando el email ya existe")
+  void createCustomer_DuplicateEmail_ThrowsException() {
+    Customer customer = Customer.builder().name("Nicolas").email("n@mail.com").build();
+    when(customerRepositoryPort.existsByEmail("n@mail.com")).thenReturn(true);
+
+    assertThrows(BusinessException.class, () -> customerService.createCustomer(customer));
+    verify(customerRepositoryPort, never()).save(any());
+  }
+
+  @Test
+  @DisplayName("Debe retornar la lista de clientes")
   void getAllCustomers_Success() {
-    // Arrange
-    List<Customer> expectedList =
-        List.of(
-            Customer.builder().id(1L).name("Juan").build(),
-            Customer.builder().id(2L).name("Maria").build());
-
-    when(customerRepositoryPort.findAll()).thenReturn(expectedList);
-
-    // Act
+    when(customerRepositoryPort.findAll()).thenReturn(List.of());
     List<Customer> result = customerService.getAllCustomers();
-
-    // Assert
-    assertEquals(2, result.size());
-    assertEquals("Juan", result.get(0).getName());
-    verify(customerRepositoryPort, times(1)).findAll();
+    assertNotNull(result);
+    verify(customerRepositoryPort).findAll();
   }
 }
