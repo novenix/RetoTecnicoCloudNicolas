@@ -1,5 +1,7 @@
 package com.bank.customers.application.service;
 
+import java.util.List;
+
 import com.bank.customers.application.port.in.CreateCustomerUseCase;
 import com.bank.customers.application.port.in.GetCustomersQuery;
 import com.bank.customers.application.port.out.CustomerRepositoryPort;
