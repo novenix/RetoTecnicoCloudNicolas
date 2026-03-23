@@ -2,6 +2,24 @@
 
 Este proyecto implementa un microservicio para la gestión de clientes, diseñado bajo principios de **Arquitectura Hexagonal** y preparado para despliegues nativos en la nube (**Google Cloud Run**).
 
+## 🌐 Enlaces del Proyecto (Cloud)
+
+### 🚀 PRODUCCIÓN
+*   **URL Base:** https://customers-api-prod-1091020309852.us-central1.run.app
+*   **Endpoints:**
+    *   `GET https://customers-api-prod-1091020309852.us-central1.run.app/api/customers`
+    *   `POST https://customers-api-prod-1091020309852.us-central1.run.app/api/customers`
+*   **Documentación (Swagger):** [Swagger UI PROD](https://customers-api-prod-1091020309852.us-central1.run.app/swagger-ui/index.html#/customer-controller/createCustomer)
+
+### 🧪 DESARROLLO
+*   **URL Base:** https://customers-api-dev-1091020309852.us-central1.run.app
+*   **Endpoints:**
+    *   `GET https://customers-api-dev-1091020309852.us-central1.run.app/api/customers`
+    *   `POST https://customers-api-dev-1091020309852.us-central1.run.app/api/customers`
+*   **Documentación (Swagger):** [Swagger UI DEV](https://customers-api-dev-1091020309852.us-central1.run.app/swagger-ui/index.html)
+
+---
+
 ## 🚀 Tecnologías
 *   **Java 21 (LTS)**
 *   **Spring Boot 3.4.x**
