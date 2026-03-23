@@ -4,6 +4,7 @@ import com.bank.customers.domain.model.Customer;
 import java.util.List;
 
 public interface CustomerRepositoryPort {
-    Customer save(Customer customer);
-    List<Customer> findAll();
+  Customer save(Customer customer);
+
+  List<Customer> findAll();
 }

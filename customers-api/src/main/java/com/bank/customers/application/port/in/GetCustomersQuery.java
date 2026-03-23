@@ -4,5 +4,5 @@ import com.bank.customers.domain.model.Customer;
 import java.util.List;
 
 public interface GetCustomersQuery {
-    List<Customer> getAllCustomers();
+  List<Customer> getAllCustomers();
 }
