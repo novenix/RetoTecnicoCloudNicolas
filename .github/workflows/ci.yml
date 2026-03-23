@@ -5,6 +5,13 @@ on:
     branches: [ "main", "develop" ]
   pull_request:
     branches: [ "main", "develop" ]
+  # Gatillo Manual (Solo para Desarrollo)
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Motivo del despliegue manual'
+        required: true
+        default: 'Prueba de feature'
 
 env:
   PROJECT_ID: mis-agentes
@@ -79,14 +86,22 @@ jobs:
   deploy:
     name: Deploy to Google Cloud Run
     needs: build-and-test
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    # Solo se ejecuta en push a main/develop O manualmente
+    if: |
+      github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') ||
+      github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
 
     - name: Set Environment Variables
       run: |
-        if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+        # Lógica de Seguridad:
+        # 1. Si es push a main -> SIEMPRE PROD
+        # 2. Si es push a develop -> SIEMPRE DEV
+        # 3. Si es manual -> SIEMPRE DEV (PROD bloqueado para manual)
+        
+        if [[ "${{ github.ref }}" == "refs/heads/main" && "${{ github.event_name }}" == "push" ]]; then
           echo "ENV_NAME=prod" >> $GITHUB_ENV
           echo "SERVICE_NAME=customers-api-prod" >> $GITHUB_ENV
           echo "SERVICE_PORT=9090" >> $GITHUB_ENV
