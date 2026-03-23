@@ -103,13 +103,21 @@ docker run -d --name customers-prod \
 *   **Ver logs de un ambiente:** `docker logs -f customers-dev` o `docker logs -f customers-prod`
 *   **Detener ambientes:** `docker stop customers-dev customers-prod`
 
-## ☁️ Despliegue en la Nube (Terraform)
-La infraestructura se encuentra modularizada en la carpeta `/terraform`. Para desplegar:
-1.  Ir a `terraform/environments/[dev|prod]`
-2.  `terraform init`
-3.  `terraform apply`
+## ☁️ Despliegue en la Nube (GCP Cloud Run)
 
-## 🛡️ Seguridad
+El proyecto cuenta con un pipeline de **CI/CD** automático:
+*   **A Desarrollo:** Se despliega al hacer merge/push a la rama `develop`.
+*   **A Producción:** Se despliega al hacer merge/push a la rama `main`.
+
+### Despliegue Manual a DEV
+Si necesitas forzar un despliegue al ambiente de desarrollo desde cualquier rama (sin hacer merge), usa este comando:
+```bash
+gh workflow run "Java & Terraform Multi-Env CI/CD" --ref $(git branch --show-current)
+```
+
+---
+
+## 🛡️ Seguridad y Calidad
 *   **Secrets:** No se almacenan credenciales en el código fuente.
 *   **Datos:** Se utilizan datos ficticios para todas las pruebas.
 *   **.gitignore:** Configurado para excluir artefactos, estados de Terraform y archivos .env.
